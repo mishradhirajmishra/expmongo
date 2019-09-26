@@ -1,0 +1,22 @@
+extends layout
+
+block content
+ .container
+   .col-xl-8.offset-md-2
+       
+        p #{event.date}
+        form(action='/update/'+event.id+'?_method=PUT' method="POST" enctype="multipart/form-data")
+            .form-group
+                label(for='id')
+                input#id.form-control(type="hidden" name="_method" value="PUT")
+            .form-group
+                label(for='name') Name:
+                input#name.form-control(type='text' name='name' value=event.name)
+            .form-group
+                label(for='name') Date:
+                input#date.form-control(type='date' name='date' value=date)
+            .form-group
+                label(for='name') Image:
+                input#image.form-control(type='file' name='image')
+            .form-group
+                button.btn.btn-primary(type='submit') Submit

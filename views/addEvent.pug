@@ -1,0 +1,18 @@
+extends layout
+
+block content
+ .container
+   .col-xl-8.offset-md-2
+        h1.text-center #{title} 
+        form(action='/' method="post" enctype="multipart/form-data")
+            .form-group
+                label(for='name') Name:
+                input#name.form-control(type='text' placeholder='Enter Name' name='name')
+            .form-group
+                label(for='name') Date:
+                input#date.form-control(type='date' name='date')
+            .form-group
+                label(for='name') Image:
+                input#image.form-control(type='file' name='image')
+            .form-group
+                button.btn.btn-primary(type='submit') Submit

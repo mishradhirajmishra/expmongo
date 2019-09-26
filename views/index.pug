@@ -1,0 +1,41 @@
+extends layout
+
+block content
+ .container
+   .col-xl-8.offset-md-2
+     h1.text-center #{title} 
+
+     table.table.table-dark
+        thead
+          tr
+            th id
+            th image
+            th Name
+            th Date
+            th Action
+        tbody
+         each event in events
+          tr          
+            td #{event.id}
+            td 
+             img.img(src='/images/'+event.image)
+            td #{event.name}
+            td #{event.date}
+            td 
+              a(href='/edit/'+event.id class='btn btn-outline-success btn-sm' ) Edit
+              button(class='btn btn-outline-danger btn-sm del' onClick='deleteEvent("'+event.id+'")') Delete
+ script.
+  function deleteEvent(id){
+  var x=confirm('Are you sure')
+  if(x==true){
+  $.ajax({
+  url: '/'+id,
+  type: "DELETE",
+  datatype: "json",
+  success: function (msg) {
+  window.location = "http://localhost:3000";
+  }
+    });
+  }
+  }
+  
