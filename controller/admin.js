@@ -37,9 +37,8 @@ module.exports.addPost=async(req,res)=>{
 module.exports.editGet=async(req,res)=>{
     var id = req.params.id;
     const event =await eventModel.findOne({_id:id});
-    date = moment(event.date).format('YYYY-MM-DD');
-    
-    console.log(event.date);
+    date = moment(event.date).format('YYYY-MM-DD');    
+    // console.log(event.date);
     res.render('editEvent', { title: 'Update Event', event:event,date:date });
 }
 
@@ -57,14 +56,23 @@ module.exports.updatePost=async(req,res)=>{
                 return res.status(500).send(err);
         });
         /*=====================================*/
+        await eventModel.findByIdAndUpdate({
+            _id:id
+        },{
+            name: req.body.name,
+            date: req.body.date,
+            image: image
+        });
        }
-    const event =await eventModel.findByIdAndUpdate({
-        _id:id
-    },{
-        name: req.body.name,
-        date: req.body.date,
-        image: image
-    });
+       else{
+        await eventModel.findByIdAndUpdate({
+            _id:id
+        },{
+            name: req.body.name,
+            date: req.body.date,            
+        });
+       }
+
  
 
    res.redirect('/');
