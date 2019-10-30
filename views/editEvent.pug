@@ -7,9 +7,6 @@ block content
         p #{event.date}
         form(action='/update/'+event.id+'?_method=PUT' method="POST" enctype="multipart/form-data")
             .form-group
-                label(for='id')
-                input#id.form-control(type="hidden" name="_method" value="PUT")
-            .form-group
                 label(for='name') Name:
                 input#name.form-control(type='text' name='name' value=event.name)
             .form-group
